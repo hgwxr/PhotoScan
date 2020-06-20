@@ -1,14 +1,18 @@
 package com.hgwxr.photo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import com.hgwxr.photo.player.SamplePlayerActivity;
 
 public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleHolder> {
 
@@ -25,9 +29,10 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleHold
 
     @Override
     public void onBindViewHolder(@NonNull SimpleHolder holder, int position) {
+        holder.itemView.setOnClickListener(v -> SamplePlayerActivity.Companion.start((Activity) v.getContext()));
         if (position == 0) {
             final View itemView = holder.itemView;
-            final ViewPager pager = (ViewPager) itemView.findViewById(R.id.item_view_pager);
+            final ViewPager pager = itemView.findViewById(R.id.item_view_pager);
             final Context context = itemView.getContext();
             pager.setAdapter(new SimplePageAdapter(context));
             ViewGroup.LayoutParams layoutParams = itemView.getLayoutParams();
