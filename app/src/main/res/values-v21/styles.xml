@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EditTextStyle">
+        <!--表示控件默认的颜色-->
+        <item name="android:colorControlNormal">@color/colorAccent</item>
+        <!--表示控件被激活时的颜色-->
+        <item name="android:colorControlActivated">@color/color99</item>
+    </style>
+</resources>

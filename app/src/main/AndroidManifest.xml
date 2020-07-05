@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".player.SamplePlayerActivity" />
+        <activity android:name=".ScrollActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph"
+        tools:ignore="InvalidNavigation,UnusedNavigation"
+        app:startDestination="@id/homeFragment">
+    <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.hgwxr.photo.ui.home.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_homeFragment_to_detailFragment"
+                app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/detailFragment"
+            android:name="com.hgwxr.photo.DetailFragment"
+            android:label="fragment_detail"
+            tools:layout="@layout/fragment_detail" >
+        <action
+                android:id="@+id/action_detailFragment_to_blankFragment"
+                app:destination="@id/blankFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/blankFragment"
+            android:name="com.hgwxr.photo.BlankFragment"
+            android:label="fragment_blank"
+            tools:layout="@layout/fragment_blank" >
+        <action
+                android:id="@+id/action_blankFragment_to_blankFragment2"
+                app:destination="@id/blankFragment2" />
+    </fragment>
+    <fragment
+            android:id="@+id/blankFragment2"
+            android:name="com.hgwxr.photo.BlankFragment2"
+            android:label="fragment_blank2"
+            tools:layout="@layout/fragment_blank2" >
+        <action
+                android:id="@+id/action_blankFragment2_to_detailFragment"
+                app:destination="@id/detailFragment" />
+    </fragment>
+</navigation>
