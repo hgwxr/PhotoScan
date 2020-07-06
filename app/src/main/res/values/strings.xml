@@ -22,4 +22,9 @@
     <string name="str_title_publish">发布</string>
     <string name="str_title_image">美图</string>
     <string name="str_title_mine">我的</string>
+    <string name="str_close">关闭</string>
+    <string name="str_phone_login">手机号登陆</string>
+    <string name="str_phone">手机号</string>
+    <string name="str_input_phone">请填写手机号</string>
+    <string name="str_next_step">下一步</string>
 </resources>

@@ -43,25 +43,7 @@ class LoginFragment : Fragment() {
         val loginButton = view.findViewById<Button>(R.id.login)
         val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
 
-        val sceneRoot = view.findViewById<ViewGroup>(R.id.scene_root)
-//        context?.let {
-//            val aScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.a_scene, it)
-//            val anotherScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.another_scene, it)
-//            val fadeTransition: Transition = Fade()
-//            TransitionManager.go(anotherScene,fadeTransition)
-//
-//
-//        }
 
-        val checkCode = view.findViewById<Button>(R.id.checkCode)
-        checkCode.setOnClickListener {
-            context?.let {
-                val aScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.a_scene, it)
-                val anotherScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.another_scene, it)
-                val fadeTransition: Transition = Fade()
-                TransitionManager.go(anotherScene,fadeTransition)
-            }
-        }
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
                 if (loginFormState == null) {
@@ -105,16 +87,16 @@ class LoginFragment : Fragment() {
             }
         }
         usernameEditText.addTextChangedListener(afterTextChangedListener)
-//        passwordEditText.addTextChangedListener(afterTextChangedListener)
-//        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
-//            if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                loginViewModel.login(
-//                    usernameEditText.text.toString(),
-//                    passwordEditText.text.toString()
-//                )
-//            }
-//            false
-//        }
+        passwordEditText.addTextChangedListener(afterTextChangedListener)
+        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                loginViewModel.login(
+                    usernameEditText.text.toString(),
+                    passwordEditText.text.toString()
+                )
+            }
+            false
+        }
 
         loginButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE

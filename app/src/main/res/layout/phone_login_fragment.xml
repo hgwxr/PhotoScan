@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.PhoneLoginFragment">
+
+    <ImageView
+            android:id="@+id/closeBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/str_close"
+            android:src="@drawable/ic_close"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/strPhoneLogin"
+            style="@style/textStyleTitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/str_phone_login"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/closeBack" />
+
+    <TextView
+            android:id="@+id/strPhoneLoginLabel"
+            style="@style/textStyleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/str_phone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/strPhoneLogin" />
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="50dp"
+            app:endIconMode="clear_text"
+            app:errorTextColor="@color/color35"
+            app:layout_constraintBaseline_toBaselineOf="@id/strPhoneLoginLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/strPhoneLoginLabel"
+            app:layout_constraintTop_toBottomOf="@+id/strPhoneLogin"
+            app:startIconContentDescription="请填写手机号">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/str_input_phone"
+                android:inputType="textPhonetic"
+                android:selectAllOnFocus="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+            android:id="@+id/dividerLine"
+            style="@style/dividerLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneLayout" />
+
+    <Button
+            android:id="@+id/btnNextStep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:height="50dp"
+            android:textColor="@drawable/bg_button_text"
+            android:background="@drawable/bg_button"
+            android:text="@string/str_next_step"
+            app:layout_constraintTop_toBottomOf="@+id/dividerLine" />
+</androidx.constraintlayout.widget.ConstraintLayout>

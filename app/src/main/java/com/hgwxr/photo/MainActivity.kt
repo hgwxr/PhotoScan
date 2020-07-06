@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val statusBarHelper = StatusBarHelper.create(this)
         statusBarHelper.setTranslucent(true)
-        statusBarHelper.setBarLightStyle()
+        statusBarHelper.setBarDarkStyle()
         statusBarHelper.setDefaultColor()
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return

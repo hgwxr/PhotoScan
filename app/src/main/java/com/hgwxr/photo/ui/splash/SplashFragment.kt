@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.hgwxr.photo.R
+import com.hgwxr.photo.utils.StatusBarHelper
 
 /**
  * An example full-screen fragment that shows and hides the system UI (i.e.
@@ -28,13 +29,13 @@ class SplashFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
-    private val viewModel: SplashViewModel by  activityViewModels()
+    private val viewModel: SplashViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         visible = true
-
         viewModel.authenticationState.observe(viewLifecycleOwner, Observer { authenticationState ->
+
             when (authenticationState) {
                 SplashViewModel.AuthenticationState.AUTHENTICATED -> {
                     val findNavController = view.findNavController()
@@ -57,21 +58,8 @@ class SplashFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
-
-    override fun onPause() {
-        super.onPause()
-        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
-        // Clear the systemUiVisibility flag
-        activity?.window?.decorView?.systemUiVisibility = 0
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 
     companion object {
         /**
