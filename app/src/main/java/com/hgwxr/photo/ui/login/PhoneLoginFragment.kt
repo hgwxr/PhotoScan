@@ -1,21 +1,24 @@
 package com.hgwxr.photo.ui.login
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
-import android.widget.EditText
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.google.android.material.textfield.TextInputLayout
 import com.hgwxr.photo.R
+import com.hgwxr.photo.utils.snackBar
+import kotlinx.android.synthetic.main.phone_login_fragment.*
 
 class PhoneLoginFragment : Fragment() {
 
@@ -39,9 +42,7 @@ class PhoneLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val phoneNumber = view.findViewById<EditText>(R.id.phoneNum)
-        val phoneLayout = view.findViewById<TextInputLayout>(R.id.phoneLayout)
-        val btnNextStep = view.findViewById<Button>(R.id.btnNextStep)
+//        val phoneNumber = view.findViewById<EditText>(R.id.phoneNum)
         viewModel.buttonEnable.observe(viewLifecycleOwner, Observer {
             btnNextStep.isEnabled = it
         })
@@ -64,19 +65,82 @@ class PhoneLoginFragment : Fragment() {
         }
         phoneNumber.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                doNextStep(phoneNumber.text.toString())
+                doNextStep()
             }
             false
         }
         btnNextStep.setOnClickListener {
-            doNextStep(phoneNumber.text.toString())
+            doNextStep()
         }
         phoneNumber.addTextChangedListener(afterTextChangedListener)
+        viewModel.processBar.observe(viewLifecycleOwner, Observer {
+            if (!it.init) {
+                return@Observer
+            }
+            if (it.success) {
+                btnGetCheckCode.startCheckCode()
+//                btnGetCheckCode.snackBar(it.message)
+            } else {
+                btnGetCheckCode.snackBar(it.message).show()
+            }
+        })
+        viewModel.clickNextStep.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                getCheckCodeGroup.visibility = View.VISIBLE
+            } else {
+                getCheckCodeGroup.visibility = View.GONE
+            }
+            if (btnNextStep.layoutParams is ConstraintLayout.LayoutParams) {
+                (btnNextStep.layoutParams as ConstraintLayout.LayoutParams).topToBottom =
+                    if (it) R.id.dividerLine1 else R.id.dividerLine
+            }
+        })
+        closeBack.setOnClickListener {
+            viewModel.clickBack()
+        }
+        btnGetCheckCode.setOnClickListener {
+            phoneNumber.isEnabled = false
+            context?.let { it1 ->
+                val phone = phoneNumber.text.toString()
+                val dialog = MaterialDialog(it1).title(R.string.str_title_check_phone)
+                    .message(
+                        text = getString(
+                            R.string.str_title_check_phone_content,
+                            phoneNumber.text.toString()
+                        )
+                    )
+                dialog.cancelOnTouchOutside(false)
+                dialog
+                    .onDismiss {
+                        phoneNumber.isEnabled = true
+                    }
+                    .show {
+                        positiveButton(R.string.str_dialog_btn_cancel) { dialog ->
+                            // Do something
+                            dialog.dismiss()
+                        }
+                        negativeButton(R.string.str_dialog_btn_ok) { dialog ->
+                            // Do something
+                            dialog.dismiss()
+                            Log.e("negativeButton:", this@PhoneLoginFragment.phoneNumber.text.toString()+"   "+phone)
+                            it.snackBar(this@PhoneLoginFragment.phoneNumber.text.toString())
+                            this@PhoneLoginFragment.viewModel.performSendCheckCode(phone)
+                        }
+                    }
+            }
+        }
+
+        viewModel.loginState.observe(viewLifecycleOwner, Observer {
+            if (it.init && it.success) {
+
+            }
+        })
+
     }
 
-    private fun doNextStep(phone: String) {
-        viewModel.performNextStep(phone)
-        findNavController().navigate(PhoneLoginFragmentDirections.actionPhoneLoginFragmentToLoginFragment())
+    private fun doNextStep() {
+        viewModel.performNextStep(phoneNumber.text.toString(), checkCode.text.toString())
+//        findNavController().navigate(PhoneLoginFragmentDirections.actionPhoneLoginFragmentToLoginFragment())
     }
 
 }

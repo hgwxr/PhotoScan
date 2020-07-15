@@ -54,7 +54,7 @@
             app:startIconContentDescription="请填写手机号">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneNum"
+                android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -74,6 +74,80 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phoneLayout" />
 
+
+    <TextView
+            android:id="@+id/strCheckCodeLabel"
+            style="@style/textStyleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/str_check_code"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dividerLine" />
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/checkCodeLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="50dp"
+            app:endIconMode="clear_text"
+
+            app:errorTextColor="@color/color35"
+            app:layout_constraintBaseline_toBaselineOf="@id/strCheckCodeLabel"
+            app:layout_constraintEnd_toEndOf="@+id/btnGetCheckCode"
+            app:layout_constraintStart_toEndOf="@+id/strCheckCodeLabel"
+            app:layout_constraintTop_toBottomOf="@+id/dividerLine"
+            app:startIconContentDescription="请填写手机号">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/checkCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/str_input_check_code"
+                android:inputType="textPhonetic"
+                android:selectAllOnFocus="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+            android:id="@+id/dividerLine1"
+            style="@style/dividerLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkCodeLayout" />
+
+    <com.hgwxr.photo.widgets.CountDownButton
+            android:id="@+id/btnGetCheckCode"
+            android:layout_width="wrap_content"
+            android:minWidth="70dp"
+            android:layout_height="30dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_button_lower"
+            android:text="@string/str_btn_check_code"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/strCheckCodeLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/checkCodeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/dividerLine" />
+
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/getCheckCodeGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btnGetCheckCode,dividerLine1,checkCodeLayout,strCheckCodeLabel" />
+
     <Button
             android:id="@+id/btnNextStep"
             android:layout_width="match_parent"
@@ -82,8 +156,8 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
             android:height="50dp"
-            android:textColor="@drawable/bg_button_text"
             android:background="@drawable/bg_button"
             android:text="@string/str_next_step"
-            app:layout_constraintTop_toBottomOf="@+id/dividerLine" />
+            android:textColor="@drawable/bg_button_text"
+            app:layout_constraintTop_toBottomOf="@+id/dividerLine1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
