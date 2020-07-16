@@ -2,6 +2,7 @@ package com.hgwxr.photo.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.hgwxr.photo.R
+import com.hgwxr.photo.data.LocalRepository
 import com.hgwxr.photo.utils.StatusBarHelper
 
 /**

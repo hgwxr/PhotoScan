@@ -13,10 +13,13 @@ import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.createGraph
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.google.android.material.textfield.TextInputLayout
 import com.hgwxr.photo.R
+import com.hgwxr.photo.utils.ToastUtils
 import com.hgwxr.photo.utils.snackBar
 import kotlinx.android.synthetic.main.phone_login_fragment.*
 
@@ -96,7 +99,9 @@ class PhoneLoginFragment : Fragment() {
             }
         })
         closeBack.setOnClickListener {
-            viewModel.clickBack()
+            findNavController().popBackStack().takeIf {
+                !viewModel.clickBack()
+            }
         }
         btnGetCheckCode.setOnClickListener {
             phoneNumber.isEnabled = false
@@ -122,17 +127,23 @@ class PhoneLoginFragment : Fragment() {
                         negativeButton(R.string.str_dialog_btn_ok) { dialog ->
                             // Do something
                             dialog.dismiss()
-                            Log.e("negativeButton:", this@PhoneLoginFragment.phoneNumber.text.toString()+"   "+phone)
+                            Log.e(
+                                "negativeButton:",
+                                this@PhoneLoginFragment.phoneNumber.text.toString() + "   " + phone
+                            )
                             it.snackBar(this@PhoneLoginFragment.phoneNumber.text.toString())
                             this@PhoneLoginFragment.viewModel.performSendCheckCode(phone)
                         }
                     }
             }
         }
-
         viewModel.loginState.observe(viewLifecycleOwner, Observer {
             if (it.init && it.success) {
-
+                findNavController()
+                findNavController().setGraph(R.navigation.nav_graph)
+                ToastUtils.showToast(it.message)
+            } else {
+                view.snackBar(it.message)
             }
         })
 

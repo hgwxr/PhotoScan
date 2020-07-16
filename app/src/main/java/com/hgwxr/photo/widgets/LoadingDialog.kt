@@ -18,17 +18,22 @@ object LoadingDialog {
 
     fun startLoadingDialog(cancelable: Boolean) {
         activity?.let {
-            val builder = AlertDialog.Builder(it,R.style.LoadingDialog)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builder.setView(R.layout.dialog_loading)
+            if (alertDialog != null) {
+                alertDialog!!.show()
             } else {
-                val inflate = it.layoutInflater.inflate(R.layout.dialog_loading, null)
-                builder.setView(inflate)
+                val builder = AlertDialog.Builder(it, R.style.LoadingDialog)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder.setView(R.layout.dialog_loading)
+                } else {
+                    val inflate = it.layoutInflater.inflate(R.layout.dialog_loading, null)
+                    builder.setView(inflate)
+                }
+                builder.setCancelable(cancelable)
+                val create = builder.create()
+                alertDialog = create
+                alertDialog!!.show()
             }
-            builder.setCancelable(cancelable)
-            val create = builder.create()
-            alertDialog = create
-            create.show()
+
         }
     }
 

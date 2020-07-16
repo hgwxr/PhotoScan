@@ -12,6 +12,10 @@ object ApiCode {
      */
     const val LOGIN = "user/account/login"
     /**
+     * 登陆V2
+     */
+    const val LOGIN_V2 = "user/account/loginv2"
+    /**
      * 登陆
      */
     const val CHECK_MOBILE = "user/info/checkbindmobile"
