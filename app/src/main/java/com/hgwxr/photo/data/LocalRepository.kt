@@ -21,11 +21,16 @@ object LocalRepository {
         return kv.getString(key, "")
     }
 
+    var configModel:ConfigModel?=null
+
     fun getLocalConfigModel(): ConfigModel? {
-        val configInfo = getString(keyLocalConfigModel)
-        return configInfo?.let {
-            return@let JSON.parseObject(configInfo, ConfigModel::class.java)
+        if (configModel==null) {
+            val configInfo = getString(keyLocalConfigModel)
+            configModel=configInfo?.let {
+                return@let JSON.parseObject(configInfo, ConfigModel::class.java)
+            }
         }
+        return configModel
     }
 
     var mLoginInfo: LoginInfo? = null

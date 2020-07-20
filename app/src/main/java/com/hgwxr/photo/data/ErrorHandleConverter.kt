@@ -24,7 +24,12 @@ class ErrorHandlerResponseConverter<T>(val type: Type?) : Converter<ResponseBody
         val string = value.string()
         val result = JSON.parseObject(string, BaseResult::class.java)
         if (result.success()) {
-            return JSON.parseObject(JSON.toJSONString(result.data), type)
+            val re = JSON.toJSONString(result.data)
+//            if (re.startsWith("[")) {
+//                throw FormatArrayException(re,-100,"help  to  array")
+//            }else{
+            return JSON.parseObject(re, type)
+//            }
         } else {
             throw   NetException(result.code, result.msg)
         }

@@ -3,6 +3,7 @@ package com.hgwxr.photo.data
 import android.util.Log
 import com.alibaba.fastjson.JSON
 import com.hgwxr.photo.data.model.ConfigModel
+import com.hgwxr.photo.utils.TypeLiteral
 import com.hgwxr.photo.widgets.LoadingDialog
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -88,7 +89,11 @@ object Repository {
 
     suspend fun getConfigModel(): ConfigModel? {
         Log.e("getConfigModel", "before")
-        return getRemoteConfigModel() ?: return LocalRepository.getLocalConfigModel()
+        if (LocalRepository.configModel == null) {
+            LocalRepository.configModel =
+                getRemoteConfigModel() ?: return LocalRepository.getLocalConfigModel()
+        }
+        return LocalRepository.configModel
     }
 
     lateinit var configInfo: ConfigModel
@@ -118,13 +123,13 @@ object Repository {
     ): T? {
         try {
             if (loading) {
-                Log.e("postMethodLoading","show"+Thread.currentThread().name)
+                Log.e("postMethodLoading", "show" + Thread.currentThread().name)
                 LoadingDialog.startLoading()
             }
             return postMethod(method, params)
         } finally {
             if (loading) {
-                Log.e("postMethodLoading","hide"+Thread.currentThread().name)
+                Log.e("postMethodLoading", "hide" + Thread.currentThread().name)
                 LoadingDialog.hideLoadingDialog()
             }
         }
@@ -151,6 +156,7 @@ object Repository {
             param = params
         )
         val await = response.await()
+//        val type = TypeLiteral<T>().type
         return JSON.parseObject(await, T::class.java);
     }
 

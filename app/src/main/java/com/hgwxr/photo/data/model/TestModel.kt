@@ -50,6 +50,10 @@ class ConfigModel(
         return apiurl.base_api
     }
 
+    fun getImgHost(): String {
+        return apiurl.pic_winow_api+"/"
+    }
+
 }
 
 class ConfigUrls {
