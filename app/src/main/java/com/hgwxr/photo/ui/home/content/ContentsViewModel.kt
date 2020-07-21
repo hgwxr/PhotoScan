@@ -24,11 +24,17 @@ class ContentsViewModel : ViewModel() {
                 try {
                     val params = mutableMapOf<String, Any>()
                     params["page"] = 1
-                    val method = Repository.getMethod<String>(ApiCode.RECOMMEND, params)
+//                    val method = Repository.getMethod<String>(ApiCode.RECOMMEND, params)
+//                    method?.let {
+//                        Log.e("performLoadData=", it.toString())
+//                        val parseArray = JSON.parseArray(method, ContentModel::class.java)
+//                        list.value = parseArray
+//                    }
+                    val method = Repository.getMethod<List<ContentModel>>(ApiCode.RECOMMEND, params)
                     method?.let {
                         Log.e("performLoadData=", it.toString())
-                        val parseArray = JSON.parseArray(method, ContentModel::class.java)
-                        list.value = parseArray
+//                        val parseArray = JSON.parseArray(method, ContentModel::class.java)
+                        list.value = it
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

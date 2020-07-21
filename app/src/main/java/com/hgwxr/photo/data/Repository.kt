@@ -4,6 +4,7 @@ import android.util.Log
 import com.alibaba.fastjson.JSON
 import com.hgwxr.photo.data.model.ConfigModel
 import com.hgwxr.photo.utils.TypeLiteral
+import com.hgwxr.photo.utils.typeLiteral
 import com.hgwxr.photo.widgets.LoadingDialog
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -156,8 +157,9 @@ object Repository {
             param = params
         )
         val await = response.await()
+        val type = typeLiteral<T>().type
 //        val type = TypeLiteral<T>().type
-        return JSON.parseObject(await, T::class.java);
+        return JSON.parseObject(await, type);
     }
 
     suspend inline fun <reified T> postRequest(
