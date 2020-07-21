@@ -6,6 +6,7 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
+
     <TextView
             android:id="@+id/textInfo"
             style="@style/textStyleLabel"
@@ -26,4 +27,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInfo" />
+
+
+    <com.hgwxr.photo.widgets.FollowUserView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+            android:id="@+id/contentNumbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_circle_black_01"
+            android:paddingStart="4dp"
+            android:paddingTop="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/contextImage"
+            tools:text="1/1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

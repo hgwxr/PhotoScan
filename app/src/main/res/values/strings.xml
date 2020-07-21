@@ -40,6 +40,9 @@
     <string name="str_title_video">视频</string>
     <string name="str_tiitle_picture">美图</string>
     <string name="str_title_else">其他</string>
+    <string name="str_share">分享</string>
+    <string name="str_comment">评论</string>
+    <string name="str_like">喜欢</string>
 
 
 </resources>

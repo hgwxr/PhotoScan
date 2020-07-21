@@ -173,7 +173,9 @@ object Repository {
             param = params
         )
         val await = response.await()
-        return JSON.parseObject(await, T::class.java);
+        val type = typeLiteral<T>().type
+//        val type = TypeLiteral<T>().type
+        return JSON.parseObject(await, type);
     }
 }
 

@@ -45,12 +45,14 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val picArr = contentModel.picArr
         if (picArr.isNotEmpty()) {
             val imageViewN = itemView.findViewById<ImageView>(R.id.contextImage)
+            val contentNumbersTv = itemView.findViewById<TextView>(R.id.contentNumbers)
             val localConfigModel = LocalRepository.getLocalConfigModel()
             val pic = picArr[0]
             localConfigModel?.let {
                 val imgHost = it.getImgHost()
                 GlideApp.with(fg).load(imgHost + pic).into(imageViewN)
             }
+            contentNumbersTv.text= "1/${picArr.size}"
         }
         val tvInfo = itemView.findViewById<TextView>(R.id.textInfo)
         contentModel.text_info.let {
