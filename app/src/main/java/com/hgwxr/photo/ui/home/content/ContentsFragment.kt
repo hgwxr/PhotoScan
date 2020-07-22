@@ -77,11 +77,14 @@ class ContentsFragment : Fragment() {
                 val pagerSnapHelper = PagerSnapHelper()
                 pagerSnapHelper.attachToRecyclerView(this)
                 viewModel.list.observe(viewLifecycleOwner, Observer { list ->
-                    if ( list.isNotEmpty()){
-                        contentAdapter.submitList(list)
+                    if (viewModel.isMainPage()) {
+                        if (list.isNotEmpty()) {
+                            loadingProcessGroup.visibility = View.GONE
+                            contentAdapter.submitList(list)
+                        }
+                        ToastUtils.showToast("加载成功")
+                        view.snackBar("加载成功")
                     }
-                    ToastUtils.showToast("加载成功")
-                    view.snackBar("加载成功")
                 })
             }
 

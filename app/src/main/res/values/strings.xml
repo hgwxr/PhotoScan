@@ -35,7 +35,7 @@
     <string name="str_title_check_phone">确认手机号</string>
     <string name="str_title_check_phone_content">我们将发送验证码短信到这个号码\n%s</string>
     <string name="str_fail_get_check_code">获取验证码失败！</string>
-    <string name="str_loading">加载中...</string>
+    <string name="str_loading">加载中…</string>
     <string name="str_title_introduce">推荐</string>
     <string name="str_title_video">视频</string>
     <string name="str_tiitle_picture">美图</string>
