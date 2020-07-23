@@ -74,8 +74,8 @@ class ContentsFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context)
                 val contentAdapter = ContentAdapter(this@ContentsFragment)
                 adapter = contentAdapter
-                val pagerSnapHelper = PagerSnapHelper()
-                pagerSnapHelper.attachToRecyclerView(this)
+//                val pagerSnapHelper = PagerSnapHelper()
+//                pagerSnapHelper.attachToRecyclerView(this)
                 viewModel.list.observe(viewLifecycleOwner, Observer { list ->
                     if (viewModel.isMainPage()) {
                         if (list.isNotEmpty()) {
