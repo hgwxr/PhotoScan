@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.hgwxr.photo.R
 import com.hgwxr.photo.ui.home.content.ContentsFragment
 import kotlinx.android.synthetic.main.main_page_fragment.*
+import kotlinx.coroutines.*
 
 class MainPageFragment : Fragment() {
 
@@ -48,6 +49,21 @@ class MainPageFragment : Fragment() {
             TabLayoutMediator(mainTabLayout, mainPageContainer) { tab, position ->
                 tab.text = ContentsFragment.getTitleByType(position)
             }.attach()
+            val mutableListOf = mutableListOf<String>("文本1", "文本1", "文本2", "文本3", "文本4", "文本5")
+            GlobalScope.launch(Dispatchers.Main) {
+              textSwitcher.startDefault()
+//                withContext(Dispatchers.Default) {
+//                    while (true) {
+//                        mutableListOf.forEach { s ->
+//                            withContext(Dispatchers.Main) {
+//                                textSwitcher.setText(s)
+////                                textSwitcher.showNext()
+//                            }
+//                            delay(2000)
+//                        }
+//                    }
+//                }
+            }
         }
     }
 
