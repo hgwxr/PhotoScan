@@ -38,7 +38,7 @@ class TextSwitchView @JvmOverloads constructor(
     suspend fun start() {
         ToastUtils.showToast(mArrays.toString())
         withContext(Dispatchers.Default) {
-            while (true) {
+            while (true) {2
                 mArrays.forEach { s ->
                     withContext(Dispatchers.Main) {
                         setText(s)
