@@ -50,12 +50,12 @@ class ContentAdapter(private val fg: Fragment) :
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)
-        when (item.level) {
+        when (item.d_type) {
             "0" -> {
-                return R.layout.item_three_pic
+                return R.layout.item_one_pic
             }
             "1" -> {
-                return R.layout.item_pics
+                return R.layout.item_three_pic
             }
             "2" -> {
                 return R.layout.item_pics
@@ -110,9 +110,8 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         contentModel: ContentModel,
         fg: Fragment,
         position: Int
-    ) {
-        when (contentModel.level) {
-            "0" -> {
+    ) {  when (contentModel.d_type) {
+            "1" -> {
                 bindTypeThreePics(contentModel, fg,position)
             }
             else -> {

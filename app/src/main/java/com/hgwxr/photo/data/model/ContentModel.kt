@@ -1,5 +1,7 @@
 package com.hgwxr.photo.data.model
 
+import com.hgwxr.photo.data.LocalRepository
+
 class ContentModel {
     var chits: String = ""
     var cid: String = ""
@@ -8,7 +10,7 @@ class ContentModel {
     var ctime: String = ""
     var fabulous: String = ""
     var id: String = ""
-    var isfollow: String=""
+    var isfollow: String = ""
     var level: String = ""
     var name: String = ""
     var open_window: String = ""
@@ -19,9 +21,16 @@ class ContentModel {
     var rtime: String = ""
     var status: String = ""
     var text_info: String = ""
+    var d_type: String = ""//,1九图(微头条) 2图文(文章)，3视频(视频)，4问题，5纯文本 （当前版本只有1和3状态）
     var userInfo: UserInfoNew? = null
+    fun getFormatPic(): List<String> {
+        val localConfigModel = LocalRepository.getLocalConfigModel()
+        return localConfigModel?.let {
+            val hostUrl = it.getImgHost()
+            return@let picArr.map { t -> hostUrl + t }
+        } ?: picArr
 
-
+    }
 }
 
 
