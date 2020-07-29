@@ -1,28 +1,39 @@
 package com.hgwxr.photo.ui.home.content.adapter
 
+import android.annotation.SuppressLint
+import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hgwxr.photo.R
 import com.hgwxr.photo.data.LocalRepository
 import com.hgwxr.photo.data.model.ContentModel
+import com.hgwxr.photo.ui.home.preview.ImagePreviewFragment
 import com.hgwxr.photo.utils.GlideApp
 import com.hgwxr.photo.widgets.PicViews
 
 val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ContentModel>() {
     override fun areItemsTheSame(oldItem: ContentModel, newItem: ContentModel): Boolean {
-        return TextUtils.equals(oldItem.id, newItem.id)
+        Log.e("DIFF_CALLBACK", "areItemsTheSame=====>" + TextUtils.equals(oldItem.id, newItem.id))
+        return   oldItem.equals(newItem)
     }
 
     override fun areContentsTheSame(oldItem: ContentModel, newItem: ContentModel): Boolean {
-        return oldItem.equals(newItem)
+        Log.e(
+            "DIFF_CALLBACK",
+            "areContentsTheSame=====>" + TextUtils.equals(oldItem.id, newItem.id)
+        )
+        return TextUtils.equals(oldItem.id, newItem.id)
     }
 }
 
@@ -31,6 +42,10 @@ class ContentAdapter(private val fg: Fragment) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentViewHolder {
         val inflate = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         return ContentViewHolder(inflate)
+    }
+
+    override fun submitList(list: MutableList<ContentModel>?) {
+        super.submitList(if (list != null) ArrayList(list) else null)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -58,13 +73,19 @@ class ContentAdapter(private val fg: Fragment) :
     }
 
     override fun onBindViewHolder(holder: ContentViewHolder, position: Int) {
-        holder.bindView(getItem(position), fg)
+        holder.bindView(getItem(position), fg,position)
     }
 }
 
 
 class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bindTypeThreePics(contentModel: ContentModel, fg: Fragment) {
+    @SuppressLint("SetTextI18n")
+    fun bindTypeThreePics(
+        contentModel: ContentModel,
+        fg: Fragment,
+        position: Int
+    ) {
+
         val threeImgViews = itemView.findViewById<PicViews>(R.id.ThreeImgViews)
         val threeContentTitleTv = itemView.findViewById<TextView>(R.id.threeContentTitleTv)
         val localConfigModel = LocalRepository.getLocalConfigModel()
@@ -73,18 +94,26 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val pic = picArr[0]
             localConfigModel?.let {
                 val imgHost = it.getImgHost()
-                threeImgViews.setImages(mutableListOf(imgHost + pic))
+                val urls = mutableListOf(imgHost + pic)
+                threeImgViews.setImages(urls)
+                itemView.setOnClickListener {
+                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
+                }
             }
         }
-        contentModel.text_info.let {
-            threeContentTitleTv.text = it
-        }
+//        contentModel.text_info.let {
+            threeContentTitleTv.text = "${contentModel.text_info}$position"
+//        }
     }
 
-    fun bindView(contentModel: ContentModel, fg: Fragment) {
+    fun bindView(
+        contentModel: ContentModel,
+        fg: Fragment,
+        position: Int
+    ) {
         when (contentModel.level) {
             "0" -> {
-                bindTypeThreePics(contentModel, fg)
+                bindTypeThreePics(contentModel, fg,position)
             }
             else -> {
                 val picArr = contentModel.picArr

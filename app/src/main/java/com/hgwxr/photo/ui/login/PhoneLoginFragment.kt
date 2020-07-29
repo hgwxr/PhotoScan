@@ -139,7 +139,6 @@ class PhoneLoginFragment : Fragment() {
         }
         viewModel.loginState.observe(viewLifecycleOwner, Observer {
             if (it.init && it.success) {
-                findNavController()
                 findNavController().setGraph(R.navigation.nav_graph)
                 ToastUtils.showToast(it.message)
             } else {

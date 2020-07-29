@@ -12,11 +12,11 @@ import com.hgwxr.photo.ui.home.picture.PictureFragment
 class PageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
 
     companion object {
-        const val NUM_PAGES = 4
+        const val NUM_PAGES = 3
         const val PAGE_MAIN = 0
-        const val PAGE_Distribute = 1
-        const val PAGE_Picture = 2
-        const val PAGE_MINE = 3
+//        const val PAGE_Distribute = 1
+        const val PAGE_Picture = 1
+        const val PAGE_MINE = 2
 
     }
 
@@ -28,9 +28,6 @@ class PageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         return when (position) {
             PAGE_MAIN -> {
                 MainPageFragment.newInstance()
-            }
-            PAGE_Distribute -> {
-                DistributeFragment.newInstance()
             }
             PAGE_Picture -> {
                 PictureFragment.newInstance()

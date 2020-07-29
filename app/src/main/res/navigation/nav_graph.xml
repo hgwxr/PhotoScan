@@ -13,6 +13,9 @@
         <action
                 android:id="@+id/action_homeFragment_to_detailFragment"
                 app:destination="@id/detailFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_imagePreviewFragment"
+                app:destination="@id/imagePreviewFragment" />
     </fragment>
     <fragment
             android:id="@+id/detailFragment"
@@ -40,5 +43,11 @@
         <action
                 android:id="@+id/action_blankFragment2_to_detailFragment"
                 app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/imagePreviewFragment"
+            android:name="com.hgwxr.photo.ui.home.preview.ImagePreviewFragment"
+            android:label="fragment_image_preview"
+            tools:layout="@layout/fragment_image_preview" >
     </fragment>
 </navigation>

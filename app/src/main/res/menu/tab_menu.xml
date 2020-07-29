@@ -8,11 +8,11 @@
             android:orderInCategory="100"
             android:id="@+id/mainPage"
             android:title="@string/str_title_home" />
-    <item
-            android:id="@+id/distribute"
-            android:icon="@android:drawable/ic_menu_add"
-            android:orderInCategory="100"
-            android:title="@string/str_title_publish" />
+<!--    <item-->
+<!--            android:id="@+id/distribute"-->
+<!--            android:icon="@android:drawable/ic_menu_add"-->
+<!--            android:orderInCategory="100"-->
+<!--            android:title="@string/str_title_publish" />-->
     <item
             android:id="@+id/picture"
             android:icon="@android:drawable/ic_menu_report_image"

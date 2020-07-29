@@ -50,7 +50,7 @@ class TextSwitchView @JvmOverloads constructor(
     }
 
     suspend fun startDefault() {
-        val mutableListOf = mutableListOf<String>("文本1", "文本1", "文本2", "文本3", "文本4", "文本5")
+        val mutableListOf = mutableListOf("文本1", "文本1", "文本2", "文本3", "文本4", "文本5")
         setTextArray(mutableListOf)
         start()
     }

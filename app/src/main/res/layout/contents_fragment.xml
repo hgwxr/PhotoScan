@@ -5,16 +5,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.content.ContentsFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contentRv"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
+<!--        <com.scwang.smart.refresh.header.FalsifyHeader-->
+<!--                android:id="@+id/refreshHeader"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contentRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+<!--        <com.scwang.smart.refresh.header.FalsifyFooter-->
+<!--                android:id="@+id/refreshFooter"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     <ProgressBar
             android:id="@+id/loadingProcess"

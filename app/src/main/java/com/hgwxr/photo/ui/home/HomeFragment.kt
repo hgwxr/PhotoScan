@@ -46,9 +46,9 @@ class HomeFragment : Fragment() {
                         R.id.mainPage -> {
                             viewPager.setCurrentItem(PageAdapter.PAGE_MAIN, true)
                         }
-                        R.id.distribute -> {
-                            viewPager.setCurrentItem(PageAdapter.PAGE_Distribute, true)
-                        }
+//                        R.id.distribute -> {
+//                            viewPager.setCurrentItem(PageAdapter.PAGE_Distribute, true)
+//                        }
                         R.id.picture -> {
                             viewPager.setCurrentItem(PageAdapter.PAGE_Picture, true)
                         }
