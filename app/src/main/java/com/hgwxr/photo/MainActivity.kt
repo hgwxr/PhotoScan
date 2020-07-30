@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.dialog.MaterialDialogs
+import com.hgwxr.photo.permission.PermissionHelper
 import com.hgwxr.photo.utils.StatusBarHelper
 import com.hgwxr.photo.widgets.LoadingDialog
 import name.gudong.loading.LoadingView
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set up Action Bar
         val navController = host.navController
+        PermissionHelper.init(this)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val dest: String = try {
                 resources.getResourceName(destination.id)
@@ -44,8 +46,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
 
 
 }

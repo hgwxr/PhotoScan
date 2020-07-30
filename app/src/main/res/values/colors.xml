@@ -16,4 +16,5 @@
     <color name="color04">#66000000</color>
     <color name="color07">#B3000000</color>
     <color name="color09">#E6000000</color>
+    <color name="colorTrans">#00ffffff</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.hgwxr.photo.ui.home.content.adapter
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hgwxr.photo.R
 import com.hgwxr.photo.data.LocalRepository
 import com.hgwxr.photo.data.model.ContentModel
+import com.hgwxr.photo.permission.PermissionHelper
 import com.hgwxr.photo.ui.home.preview.ImagePreviewFragment
 import com.hgwxr.photo.utils.GlideApp
 import com.hgwxr.photo.widgets.PicViews
@@ -79,8 +81,7 @@ class ContentAdapter(private val fg: Fragment) :
 
 
 class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    @SuppressLint("SetTextI18n")
-    fun bindTypeThreePics(
+    private fun bindTypeThreePics(
         contentModel: ContentModel,
         fg: Fragment,
         position: Int
@@ -97,7 +98,9 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 val urls = mutableListOf(imgHost + pic)
                 threeImgViews.setImages(urls)
                 itemView.setOnClickListener {
-                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
+//                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
+                    PermissionHelper.applyPermission(Manifest.permission_group.STORAGE)
+//                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
                 }
             }
         }

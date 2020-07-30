@@ -5,6 +5,7 @@
         android:id="@+id/nav_graph"
         tools:ignore="InvalidNavigation,UnusedNavigation"
         app:startDestination="@id/homeFragment">
+
     <fragment
             android:id="@+id/homeFragment"
             android:name="com.hgwxr.photo.ui.home.HomeFragment"
@@ -35,6 +36,7 @@
                 android:id="@+id/action_blankFragment_to_blankFragment2"
                 app:destination="@id/blankFragment2" />
     </fragment>
+
     <fragment
             android:id="@+id/blankFragment2"
             android:name="com.hgwxr.photo.BlankFragment2"
