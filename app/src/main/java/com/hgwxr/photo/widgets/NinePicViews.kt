@@ -27,12 +27,11 @@ class NinePicViews @JvmOverloads constructor(
     var itemHeight: Float = 0.0f
 
     val columnCount = 3
-    var spaceW = 0
-    var spaceH = 0
+    var spaceW = 5
+    var spaceH = 5
 
     init {
-        spaceW = 0
-        spaceH = 0
+
     }
 
     fun dp2px(dp: Int): Float {
@@ -96,16 +95,15 @@ class NinePicViews @JvmOverloads constructor(
 //        }
         childrenView.forEachIndexed { index, view ->
             run {
-                topC = ((index / columnCount) * itemHeight).toInt()
+                topC =((index / columnCount) * (itemHeight+spaceH)).toInt()
                 if (index % columnCount == 0) {
                     leftC = 0
-                    Log.e("forEachIndexed","==1>"+leftC+"  "+topC)
+                    Log.e("forEachIndexed","==1>"+index)
 
                 } else {
-                    Log.e("forEachIndexed","==2>"+leftC+"  "+(index / columnCount) * itemWidth)
-                    leftC = (leftC + (index / columnCount) * itemWidth).toInt()
+                    Log.e("forEachIndexed","==2>"+index+"  "+topC)
+                    leftC = (leftC +spaceW+ (index % columnCount) * itemWidth).toInt()
                 }
-                leftC = (leftC + itemWidth).toInt()
                 Log.e("forEachIndexed","==>"+leftC+"  "+topC)
                 layoutChild(view, leftC, topC)
             }
