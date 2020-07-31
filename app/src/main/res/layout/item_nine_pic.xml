@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+    <TextView
+            android:id="@+id/threeContentTitleTv"
+            style="@style/textStyleContentItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="测试" />
+
+    <com.hgwxr.photo.widgets.NinePicViews
+            android:background="@color/colorAccent"
+            android:id="@+id/ninePicViews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:columnCount="3"
+            android:useDefaultMargins="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/threeContentTitleTv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

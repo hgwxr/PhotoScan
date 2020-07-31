@@ -23,6 +23,7 @@ import com.hgwxr.photo.permission.PermissionHelper
 import com.hgwxr.photo.ui.home.preview.ImagePreviewFragment
 import com.hgwxr.photo.utils.GlideApp
 import com.hgwxr.photo.widgets.PicViews
+import kotlinx.android.synthetic.main.item_nine_pic.view.*
 
 val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ContentModel>() {
     override fun areItemsTheSame(oldItem: ContentModel, newItem: ContentModel): Boolean {
@@ -50,26 +51,27 @@ class ContentAdapter(private val fg: Fragment) :
         super.submitList(if (list != null) ArrayList(list) else null)
     }
 
+    //1九图(微头条) 2图文(文章)，3视频(视频)，4问题，5纯文本 （当前版本只有1和3状态）
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)
         when (item.d_type) {
-            "0" -> {
-                return R.layout.item_one_pic
-            }
-            "1" -> {
-                return R.layout.item_three_pic
-            }
-            "2" -> {
-                return R.layout.item_pics
-            }
-            "3" -> {
-                return R.layout.item_pics
-            }
-            "4" -> {
-                return R.layout.item_pics
-            }
+//            "0" -> {
+//                return R.layout.item_one_pic
+//            }
+//            "1" -> {
+//                return R.layout.item_three_pic
+//            }
+//            "2" -> {
+//                return R.layout.item_pics
+//            }
+//            "3" -> {
+//                return R.layout.item_pics
+//            }
+//            "4" -> {
+//                return R.layout.item_pics
+//            }
             else -> {
-                return R.layout.item_pics
+                return R.layout.item_nine_pic
             }
         }
     }
@@ -86,7 +88,6 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fg: Fragment,
         position: Int
     ) {
-
         val threeImgViews = itemView.findViewById<PicViews>(R.id.ThreeImgViews)
         val threeContentTitleTv = itemView.findViewById<TextView>(R.id.threeContentTitleTv)
         val localConfigModel = LocalRepository.getLocalConfigModel()
@@ -98,8 +99,8 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 val urls = mutableListOf(imgHost + pic)
                 threeImgViews.setImages(urls)
                 itemView.setOnClickListener {
-//                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
-                    PermissionHelper.applyPermission(Manifest.permission_group.STORAGE)
+                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
+//                    PermissionHelper.applyPermission(Manifest.permission_group.STORAGE)
 //                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
                 }
             }
@@ -114,28 +115,39 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fg: Fragment,
         position: Int
     ) {  when (contentModel.d_type) {
-            "1" -> {
-                bindTypeThreePics(contentModel, fg,position)
-            }
+//            "0" -> {
+//                bindTypeThreePics(contentModel, fg,position)
+//            }
+//            "1" -> {
+//                val picArr = contentModel.picArr
+//                if (picArr.isNotEmpty()) {
+//                    val imageViewN = itemView.findViewById<ImageView>(R.id.contextImage)
+//                    val contentNumbersTv = itemView.findViewById<TextView>(R.id.contentNumbers)
+//                    val localConfigModel = LocalRepository.getLocalConfigModel()
+//                    val pic = picArr[0]
+//                    localConfigModel?.let {
+//                        val imgHost = it.getImgHost()
+//                        GlideApp.with(fg).load(imgHost + pic).into(imageViewN)
+//                    }
+//                    contentNumbersTv.text = "1/${picArr.size}"
+//                }
+//                val tvInfo = itemView.findViewById<TextView>(R.id.textInfo)
+//                contentModel.text_info.let {
+//                    tvInfo.text = it
+//                }
+//            }
             else -> {
-                val picArr = contentModel.picArr
-                if (picArr.isNotEmpty()) {
-                    val imageViewN = itemView.findViewById<ImageView>(R.id.contextImage)
-                    val contentNumbersTv = itemView.findViewById<TextView>(R.id.contentNumbers)
-                    val localConfigModel = LocalRepository.getLocalConfigModel()
-                    val pic = picArr[0]
-                    localConfigModel?.let {
-                        val imgHost = it.getImgHost()
-                        GlideApp.with(fg).load(imgHost + pic).into(imageViewN)
-                    }
-                    contentNumbersTv.text = "1/${picArr.size}"
-                }
-                val tvInfo = itemView.findViewById<TextView>(R.id.textInfo)
-                contentModel.text_info.let {
-                    tvInfo.text = it
-                }
+
+                binNinePicView(contentModel,fg,position)
             }
         }
+
+    }
+
+    private fun binNinePicView(contentModel: ContentModel, fg: Fragment, position: Int) {
+        itemView.threeContentTitleTv.text=contentModel.text_info
+        val formatPic = contentModel.getFormatPic()
+        itemView.ninePicViews.setImages(formatPic)
 
     }
 }
