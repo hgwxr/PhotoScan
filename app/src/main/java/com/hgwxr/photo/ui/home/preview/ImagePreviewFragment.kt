@@ -47,7 +47,6 @@ class ImagePreviewFragment : Fragment() {
                         findNavController().popBackStack()
                     }
                 }
-
             }
         }
         }

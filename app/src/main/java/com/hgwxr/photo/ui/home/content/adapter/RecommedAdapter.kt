@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hgwxr.photo.R
 import com.hgwxr.photo.data.model.ContentModel
 import com.hgwxr.photo.ui.home.preview.ImagePreviewFragment
+import com.hgwxr.photo.utils.loadCircleImage
 import com.hgwxr.photo.utils.loadImage
 
 class RecommedAdapter(val fragment: Fragment) :
@@ -31,13 +32,16 @@ class RecommedAdapter(val fragment: Fragment) :
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)
-        var layoutType = R.layout.item_video
+        var layoutType = R.layout.item_image_more
         when (item.d_type) {
             "3" -> {
                 layoutType = R.layout.item_video
             }
             "1" -> {
                 layoutType = when (item.picArr.size) {
+                    0 -> {
+                        R.layout.item_image
+                    }
                     1 -> {
                         R.layout.item_image
                     }
@@ -69,6 +73,14 @@ class RecommedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fragment: Fragment,
         inflater: LayoutInflater
     ) {
+        val tvUserName = itemView.findViewById<TextView>(R.id.userNameTv)
+        val ivUser = itemView.findViewById<ImageView>(R.id.headerIv)
+        item.userInfo?.let {
+            it.baseInfo?.let { baseInfo ->
+                tvUserName.text = baseInfo.username
+                fragment.loadCircleImage(baseInfo.getFormatAvatar(), ivUser,R.drawable.ic_default_head)
+            }
+        }
         when (item.d_type) {
             "3" -> {
                 val tvVideo = itemView.findViewById<TextView>(R.id.videoText)
@@ -81,6 +93,15 @@ class RecommedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
             "1" -> {
                 when (item.picArr.size) {
+                    0 -> {
+                        val tvVideo = itemView.findViewById<TextView>(R.id.videoText)
+                        if (!TextUtils.isEmpty(item.text_info)) {
+                            tvVideo.isVisible = true
+                            tvVideo.text = item.text_info
+                        } else {
+                            tvVideo.isVisible = false
+                        }
+                    }
                     1 -> {
                         val tvVideo = itemView.findViewById<TextView>(R.id.videoText)
                         if (!TextUtils.isEmpty(item.text_info)) {
@@ -120,6 +141,7 @@ class RecommedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                             tvVideo.isVisible = false
                         }
                         val mediaContents = itemView.findViewById<GridLayout>(R.id.mediaContents)
+                        mediaContents.isVisible = true
                         mediaContents.removeAllViews()
                         val formatPic = item.getFormatPic()
                         if (formatPic.isNotEmpty()) {
@@ -148,6 +170,10 @@ class RecommedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     tvVideo.text = item.text_info
                 } else {
                     tvVideo.isVisible = false
+                }
+                if (item.getFormatPic().isEmpty()) {
+                    val mediaContents = itemView.findViewById<GridLayout>(R.id.mediaContents)
+                    mediaContents.isVisible = false
                 }
             }
         }

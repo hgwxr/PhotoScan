@@ -15,9 +15,10 @@
             android:src="@drawable/ic_default_head"
             android:contentDescription="@string/str_header" />
     <TextView
+            android:id="@+id/userNameTv"
             app:layout_constraintStart_toEndOf="@+id/headerIv"
             app:layout_constraintTop_toTopOf="@+id/headerIv"
-            android:text="@string/str_dialog_btn_ok"
+            tools:text="@string/str_dialog_btn_ok"
             style="@style/textStyleLabel"
             android:layout_marginStart="5dp"
             app:layout_constraintBottom_toBottomOf="@id/headerIv"

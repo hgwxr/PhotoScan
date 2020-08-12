@@ -52,4 +52,10 @@ class BaseInfo {
     var username: String = ""
     var vip_day: Int = 0
     var vip_endtime: String = ""
+    fun getFormatAvatar(): String {
+        val localConfigModel = LocalRepository.getLocalConfigModel()
+        return localConfigModel?.let {
+           return@let it.getImgHost()+avatar
+        } ?: avatar
+    }
 }
