@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.item_nine_pic.view.*
 val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ContentModel>() {
     override fun areItemsTheSame(oldItem: ContentModel, newItem: ContentModel): Boolean {
         Log.e("DIFF_CALLBACK", "areItemsTheSame=====>" + TextUtils.equals(oldItem.id, newItem.id))
-        return   oldItem.equals(newItem)
+        return oldItem.equals(newItem)
     }
 
     override fun areContentsTheSame(oldItem: ContentModel, newItem: ContentModel): Boolean {
@@ -64,9 +64,9 @@ class ContentAdapter(private val fg: Fragment) :
 //            "2" -> {
 //                return R.layout.item_pics
 //            }
-//            "3" -> {
-//                return R.layout.item_pics
-//            }
+            "3" -> {
+                return R.layout.item_pics
+            }
 //            "4" -> {
 //                return R.layout.item_pics
 //            }
@@ -77,7 +77,7 @@ class ContentAdapter(private val fg: Fragment) :
     }
 
     override fun onBindViewHolder(holder: ContentViewHolder, position: Int) {
-        holder.bindView(getItem(position), fg,position)
+        holder.bindView(getItem(position), fg, position)
     }
 }
 
@@ -99,14 +99,14 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 val urls = mutableListOf(imgHost + pic)
                 threeImgViews.setImages(urls)
                 itemView.setOnClickListener {
-                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
+                    ImagePreviewFragment.start(fg, arrayListOf(imgHost + pic))
 //                    PermissionHelper.applyPermission(Manifest.permission_group.STORAGE)
 //                    ImagePreviewFragment.start(fg,arrayListOf(imgHost + pic))
                 }
             }
         }
 //        contentModel.text_info.let {
-            threeContentTitleTv.text = "${contentModel.text_info}$position"
+        threeContentTitleTv.text = "${contentModel.text_info}$position"
 //        }
     }
 
@@ -114,7 +114,8 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         contentModel: ContentModel,
         fg: Fragment,
         position: Int
-    ) {  when (contentModel.d_type) {
+    ) {
+        when (contentModel.d_type) {
 //            "0" -> {
 //                bindTypeThreePics(contentModel, fg,position)
 //            }
@@ -136,16 +137,20 @@ class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 //                    tvInfo.text = it
 //                }
 //            }
+            "3" -> {
+                val tvView = itemView.findViewById<TextView>(R.id.videoText)
+                contentModel.getFormatPic()
+            }
             else -> {
 
-                binNinePicView(contentModel,fg,position)
+                binNinePicView(contentModel, fg, position)
             }
         }
 
     }
 
     private fun binNinePicView(contentModel: ContentModel, fg: Fragment, position: Int) {
-        itemView.threeContentTitleTv.text=contentModel.text_info
+        itemView.threeContentTitleTv.text = contentModel.text_info
         val formatPic = contentModel.getFormatPic()
         itemView.ninePicViews.setImages(formatPic)
 

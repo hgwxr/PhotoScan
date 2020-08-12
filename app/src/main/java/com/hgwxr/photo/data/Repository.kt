@@ -110,18 +110,24 @@ object Repository {
     suspend inline fun <reified T> getMethod(
         method: String,
         params: MutableMap<String, Any>
-    ): T? {
-        val configInfoModel = getConfigInfoModel()
-        return configInfoModel?.let {
-            return@let getRequest<T>(baseUrl = it.getHostUrl(), method = method, params = params)
-        }
+    ): T {
+            val configInfoModel = getConfigInfoModel()
+            if (configInfoModel == null) {
+                throw NetException(-1, "数据异常!")
+            } else {
+                return getRequest<T>(
+                    baseUrl = configInfoModel.getHostUrl(),
+                    method = method,
+                    params = params
+                )
+            }
     }
 
     suspend inline fun <reified T> postMethodLoading(
         method: String,
         params: MutableMap<String, Any>,
         loading: Boolean = true
-    ): T? {
+    ): T {
         try {
             if (loading) {
                 Log.e("postMethodLoading", "show" + Thread.currentThread().name)
@@ -139,10 +145,16 @@ object Repository {
     suspend inline fun <reified T> postMethod(
         method: String,
         params: MutableMap<String, Any>
-    ): T? {
+    ): T {
         val configInfoModel = getConfigInfoModel()
-        return configInfoModel?.let {
-            return@let postRequest<T>(baseUrl = it.getHostUrl(), method = method, params = params)
+        if (configInfoModel == null) {
+            throw NetException(-1, "数据异常")
+        } else {
+            return postRequest(
+                baseUrl = configInfoModel.getHostUrl(),
+                method = method,
+                params = params
+            )
         }
     }
 

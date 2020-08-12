@@ -43,6 +43,7 @@
     <string name="str_share">分享</string>
     <string name="str_comment">评论</string>
     <string name="str_like">喜欢</string>
+    <string name="str_header">头像</string>
 
 
 </resources>

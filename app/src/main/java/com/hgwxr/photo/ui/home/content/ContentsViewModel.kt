@@ -44,6 +44,7 @@ class ContentsViewModel : ViewModel() {
     }
 
     private suspend fun loadRecommend(): MutableList<ContentModel>? {
+        mPage=1
         val params = mutableMapOf<String, Any>()
         params["page"] = mPage
         return Repository.getMethod<MutableList<ContentModel>>(ApiCode.RECOMMEND, params)

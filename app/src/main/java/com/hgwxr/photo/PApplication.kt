@@ -23,4 +23,5 @@ class PApplication : MultiDexApplication() {
         val initialize = MMKV.initialize(this)
         Log.d("PApplication", "mmkv-----path:$initialize")
     }
+
 }

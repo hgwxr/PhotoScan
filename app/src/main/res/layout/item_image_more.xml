@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+    <ImageView
+            android:id="@+id/headerIv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/str_header"
+            android:src="@drawable/ic_default_head"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            style="@style/textStyleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/str_dialog_btn_ok"
+            app:layout_constraintBottom_toBottomOf="@id/headerIv"
+            app:layout_constraintStart_toEndOf="@+id/headerIv"
+            app:layout_constraintTop_toTopOf="@+id/headerIv" />
+
+    <TextView
+            android:id="@+id/videoText"
+            style="@style/textStyleLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerIv"
+            tools:text="@string/str_dialog_btn_ok" />
+
+    <GridLayout
+            android:id="@+id/mediaContents"
+            android:layout_marginTop="5dp"
+            android:useDefaultMargins="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/videoText">
+
+
+
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

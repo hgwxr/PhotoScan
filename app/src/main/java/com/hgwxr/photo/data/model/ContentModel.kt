@@ -23,6 +23,8 @@ class ContentModel {
     var text_info: String = ""
     var d_type: String = ""//,1九图(微头条) 2图文(文章)，3视频(视频)，4问题，5纯文本 （当前版本只有1和3状态）
     var userInfo: UserInfoNew? = null
+    var vod_url: String="" //视频地址
+    var pic_url: String=""//封面
     fun getFormatPic(): List<String> {
         val localConfigModel = LocalRepository.getLocalConfigModel()
         return localConfigModel?.let {

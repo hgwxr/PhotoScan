@@ -38,13 +38,16 @@ class ImagePreviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (imageUrls.isNotEmpty()) {
-
         GlobalScope.launch {
             withContext(Dispatchers.IO){
                 val get = GlideApp.with(this@ImagePreviewFragment).downloadOnly().load(imageUrls[0]).submit().get()
                 withContext(Dispatchers.Main){
                     subScaleView.setImage(ImageSource.uri(get.absolutePath))
+                    subScaleView.setOnClickListener {
+                        findNavController().popBackStack()
+                    }
                 }
+
             }
         }
         }

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hgwxr.photo.R
 import com.hgwxr.photo.ui.home.content.ContentsFragment
+import com.hgwxr.photo.ui.home.content.RecommedFragment
 import kotlinx.android.synthetic.main.main_page_fragment.*
 import kotlinx.coroutines.*
 
@@ -40,7 +41,8 @@ class MainPageFragment : Fragment() {
         activity?.let {
             val mainPagerAdapter = MainPagerAdapter(
                 it, mutableListOf(
-                    ContentsFragment.newInstance(ContentsFragment.TYPE_INTRODUCE),
+                    RecommedFragment.newInstance(),
+//                    ContentsFragment.newInstance(ContentsFragment.TYPE_INTRODUCE),
                     ContentsFragment.newInstance(ContentsFragment.TYPE_VIDEO),
                     ContentsFragment.newInstance(ContentsFragment.TYPE_PICTURE)
                 )
@@ -51,7 +53,7 @@ class MainPageFragment : Fragment() {
             }.attach()
             val mutableListOf = mutableListOf<String>("文本1", "文本1", "文本2", "文本3", "文本4", "文本5")
             GlobalScope.launch(Dispatchers.Main) {
-              textSwitcher.startDefault()
+                textSwitcher.startDefault()
 //                withContext(Dispatchers.Default) {
 //                    while (true) {
 //                        mutableListOf.forEach { s ->

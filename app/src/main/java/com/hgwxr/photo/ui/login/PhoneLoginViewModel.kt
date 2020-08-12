@@ -65,7 +65,7 @@ class PhoneLoginViewModel : ViewModel() {
             try {
                 val response = Repository.postMethodLoading<LoginInfo>(ApiCode.LOGIN_V2, params)
                 Log.e("performNextStep:", response.toString())
-                response?.let {
+                response.let {
                     LocalRepository.saveUserInfo(it)
                 }
                 loginState.value = LoginState("登录成功", true, init = true)

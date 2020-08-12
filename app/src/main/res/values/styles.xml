@@ -18,6 +18,10 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/color33</item>
     </style>
+    <style name="textStyleHeadeLabel">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color99</item>
+    </style>
     <style name="textStyleContentItem" parent="textStyleLabel">
     </style>
     <style name="dividerLine">
